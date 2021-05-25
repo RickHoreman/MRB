@@ -1,5 +1,7 @@
 #include "hwlib.hpp"
-#include "pwm.hpp"
+#include "rtos.hpp"
+#include <string>
+#include "pid_controller.hpp"
 #include "hc_sr04.hpp"
 
 int main() {
@@ -34,8 +36,8 @@ int main() {
         //     }
         // }
 
-        distanceSensor.read();
-        //hwlib::cout << distanceSensor.read() << "\n";
+        //distanceSensor.read();
+        hwlib::cout << distanceSensor.read() << "\n";
     }
     uint_fast64_t endTime = hwlib::now_us();
 

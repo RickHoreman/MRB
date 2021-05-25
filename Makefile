@@ -12,10 +12,10 @@
 SOURCES := 
 
 # header files in this project
-HEADERS := pwm.hpp
+HEADERS := pid_controller.hpp hc_sr04.hpp
 
 # other places to look for files for this project
-SEARCH  := 
+SEARCH  := C:/Users/rick2/OneDrive/HU/c++_omgeving/rtos
 
 # set RELATIVE to the next higher directory 
 # and defer to the appropriate Makefile.* there
