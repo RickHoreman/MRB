@@ -16,7 +16,10 @@ int main() {
     // int highestPotValue = 4500;
     // int angle=0;
 
-    for(;;){
+    uint_fast64_t startTime = hwlib::now_us();
+    unsigned int cycles = 1000;
+    for(unsigned int i=0; i<cycles; i++){
+    //for(;;){
         //potentiometer.refresh();
         //potValue = potentiometer.read();
         //if(potValue < lowestPotValue) lowestPotValue = potValue;
@@ -31,6 +34,10 @@ int main() {
         //     }
         // }
 
-        hwlib::cout << distanceSensor.read() << "\n";
+        distanceSensor.read();
+        //hwlib::cout << distanceSensor.read() << "\n";
     }
+    uint_fast64_t endTime = hwlib::now_us();
+
+    hwlib::cout << "Time in micro seconds\nTotal time: " << endTime - startTime << " (for " << cycles << " cycles). Time per cycle: " << (endTime - startTime) /cycles << "\n";
 }
