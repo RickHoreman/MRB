@@ -15,7 +15,7 @@ SOURCES :=
 HEADERS := pid_controller.hpp hc_sr04.hpp
 
 # other places to look for files for this project
-SEARCH  := C:/Users/rick2/OneDrive/HU/c++_omgeving/rtos
+SEARCH  := 
 
 # set RELATIVE to the next higher directory 
 # and defer to the appropriate Makefile.* there

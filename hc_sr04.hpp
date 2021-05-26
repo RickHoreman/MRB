@@ -1,17 +1,35 @@
 #ifndef __HC_SR04_HPP__
 #define __HC_SR04_HPP__
 
+#include "hwlib.hpp"
+#include "rtos.hpp"
+#include <string>
+#include "pid_controller.hpp"
+
 class HC_SR04 : public rtos::task<>{
 private:
     hwlib::target::pin_out trigger;
     hwlib::target::pin_in echo;
+    rtos::pool<int> & distancePool;
+    PID_Controller & pidController;
 public:
-    HC_SR04(const std::string & name, const hwlib::target::pins & triggerPin, const hwlib::target::pins & echoPin):
-        task(name),
+    HC_SR04(const hwlib::target::pins & triggerPin, const hwlib::target::pins & echoPin, rtos::pool<int> & distancePool, PID_Controller & pidController):
+        task("HC_SR04"),
         trigger(triggerPin),
-        echo(echoPin)
+        echo(echoPin),
+        distancePool(distancePool),
+        pidController(pidController)
     {
         trigger.write(false);
+    }
+
+    void main(){
+        distancePool.write(read());
+        pidController.setFirstRead();
+        for(;;){
+            distancePool.write(read());
+            release();
+        }
     }
 
     int read(){                     //Average time varies wildy from roughly 1ms to over 6 times that, depending on distance.
